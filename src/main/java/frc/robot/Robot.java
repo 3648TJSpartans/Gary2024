@@ -64,6 +64,10 @@ public class Robot extends TimedRobot {
   final double cameraAngle = 25;
   AddressableLED m_led = new AddressableLED(7);
   AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(6);
+  //DigitalOutput give = new DigitalOutput(1);
+  DigitalInput giveIn = new DigitalInput(1);
+  //DigitalOutput take = new DigitalOutput(2);
+
 
 
   /**
@@ -78,6 +82,8 @@ public class Robot extends TimedRobot {
     m_led.setLength(m_ledBuffer.getLength());
     m_led.setData(m_ledBuffer);
     m_led.start();
+    //give.set(true);
+    //take.set(true);
   }
 
   /**
@@ -127,7 +133,7 @@ public class Robot extends TimedRobot {
       time.start();
       rightSpark.set(0.3);
       leftSpark.set(0.3);
-      while (time.get() < 1) {;}
+      while (time.get() < 1) {}
       rightSpark.set(0);
       leftSpark.set(0);
       shoot.set(0.5); 
@@ -178,11 +184,11 @@ public class Robot extends TimedRobot {
       if (stick.getRawButtonPressed(3)) {
         if (driveType) {
           driveType = false;
-          setColor(0, m_ledBuffer.getLength(), 255, 0, 0);
+          //setColor(0, m_ledBuffer.getLength(), 255, 0, 0);
         }
         else {
           driveType = true;
-          setColor(0, m_ledBuffer.getLength(), 0, 255, 0);
+          //setColor(0, m_ledBuffer.getLength(), 0, 255, 0);
         }
       }
     //Increase and decrease speed of Gary
@@ -316,6 +322,11 @@ public class Robot extends TimedRobot {
       // if (stick.getPOV() == 0) {
 
       // }
+      if (!giveIn.get()) {
+        setColor(0, m_ledBuffer.getLength(), 200, 0, 0);
+      } else {
+        setColor(0, m_ledBuffer.getLength(), 0, 200, 0);
+      }
       }
   @Override
   public void testInit() {
@@ -376,3 +387,7 @@ public class Robot extends TimedRobot {
   }
 
 }
+
+
+
+
